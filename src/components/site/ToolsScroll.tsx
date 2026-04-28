@@ -617,8 +617,9 @@ export const ToolsScroll = () => {
           </div>
           <div className="h-[2px] w-full bg-white/5">
             <div
-              className="h-full bg-gradient-to-r from-accent to-accent-glow transition-[width] duration-200 ease-out"
-              style={{ width: `${Math.max(4, progress * 100)}%` }}
+              ref={progressBarRef}
+              className="h-full bg-gradient-to-r from-accent to-accent-glow"
+              style={{ width: "4%" }}
             />
           </div>
         </div>

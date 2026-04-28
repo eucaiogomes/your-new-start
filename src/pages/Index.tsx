@@ -5,7 +5,6 @@ import { ToolsScroll } from "@/components/site/ToolsScroll";
 import { StatsAndPartner } from "@/components/site/StatsAndPartner";
 import { Testimonials } from "@/components/site/Testimonials";
 
-import { Blog } from "@/components/site/Blog";
 import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
 import { useEffect } from "react";
@@ -38,7 +37,7 @@ const Index = () => {
         <ToolsScroll />
         <StatsAndPartner />
         <Testimonials />
-        <Blog />
+        
       </main>
       <Footer />
     </div>

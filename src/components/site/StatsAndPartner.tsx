@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2 } from "lucide-react";
+import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import blog1 from "@/assets/blog-1.jpg";
+import blog2 from "@/assets/blog-2.jpg";
+import blog3 from "@/assets/blog-3.jpg";
+
+const blogPosts = [
+  { tag: "Gestão do Conhecimento", title: "Como a educação corporativa pode transformar resultados", img: blog1 },
+  { tag: "Treinamento", title: "Tendências de aprendizagem para os próximos anos", img: blog2, highlight: true },
+  { tag: "Comunicação", title: "Estratégias para comunicar com impacto na empresa", img: blog3 },
+];
 
 type Accent = "orange" | "blue";
 
@@ -342,6 +351,9 @@ export const StatsAndPartner = () => (
 
       {/* ===== Formulário CTA (unificado, dark) ===== */}
       <ConsultorCta />
+
+      {/* ===== Blog (unificado, dark) ===== */}
+      <BlogUnified />
     </div>
 
     {/* fade inferior — funde com a próxima seção */}
@@ -623,6 +635,108 @@ const ConsultorCta = () => {
               </Button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ============================================================
+   Blog — Sessão unificada (dark)
+   ============================================================ */
+const BlogUnified = () => {
+  return (
+    <div id="blog" className="relative mt-28 reveal">
+      {/* divisor sutil */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-14 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      />
+
+      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:gap-16">
+        {/* LEFT — título + CTA */}
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+              Conteúdos para você
+            </span>
+          </div>
+          <h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl">
+            Fique atualizado<br />
+            com o que{" "}
+            <span className="bg-gradient-to-r from-accent to-accent-glow bg-clip-text text-transparent">
+              importa
+            </span>
+          </h2>
+          <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/65">
+            Insights que ajudam sua empresa a evoluir de verdade.
+          </p>
+
+          <button
+            type="button"
+            className="group mt-8 inline-flex items-center gap-3 rounded-full bg-accent-gradient px-7 py-4 text-sm font-semibold text-white shadow-glow-accent transition-transform hover:scale-[1.03]"
+          >
+            Ver todos os conteúdos
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-0.5">
+              <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </button>
+        </div>
+
+        {/* RIGHT — cards */}
+        <div className="relative">
+          <div className="grid gap-5 md:grid-cols-3">
+            {blogPosts.map((p, i) => (
+              <a
+                key={p.title}
+                href="#"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-white/[0.05] hover:shadow-[0_30px_60px_-20px_hsl(22_95%_25%/0.6)]"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                {/* imagem */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-[hsl(222_90%_6%)]/80 via-transparent to-transparent"
+                  />
+                  <span className="absolute left-4 top-4 rounded-md bg-[hsl(222_85%_10%)]/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white ring-1 ring-white/15 backdrop-blur">
+                    {p.tag}
+                  </span>
+                </div>
+
+                {/* corpo */}
+                <div className="flex flex-1 flex-col p-6">
+                  <h3
+                    className={`font-display text-base font-bold leading-snug transition-colors md:text-lg ${
+                      p.highlight ? "text-accent" : "text-white group-hover:text-accent"
+                    }`}
+                  >
+                    {p.title}
+                  </h3>
+                  <div className="mt-auto flex items-center gap-2 pt-6 text-xs font-semibold text-accent">
+                    <span className="grid h-5 w-5 place-items-center">
+                      <Play className="h-3 w-3 fill-accent text-accent" />
+                    </span>
+                    Leia mais
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* seta lateral */}
+          <button
+            aria-label="Próximo"
+            className="absolute -right-5 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-white/[0.06] text-white shadow-[0_10px_30px_-8px_hsl(222_90%_3%/0.7)] backdrop-blur transition-all hover:border-accent/50 hover:bg-accent/20 hover:text-accent-glow lg:grid"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </div>

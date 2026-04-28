@@ -409,14 +409,17 @@ const SolutionsParallax = () => {
           {/* viewport */}
           <div className="relative h-[460px] overflow-hidden rounded-[32px] md:h-[500px]">
             <div
-              className="flex h-full transition-transform duration-700 ease-out"
-              style={{ transform: `translateX(-${active * 100}%)`, width: `${solutions.length * 100}%` }}
+              className="flex h-full w-full will-change-transform"
+              style={{
+                transform: `translate3d(-${active * 100}%, 0, 0)`,
+                transition: "transform 900ms cubic-bezier(0.65, 0, 0.35, 1)",
+              }}
             >
               {solutions.map(({ icon: Icon, title, desc, accent }) => {
                 const a = accentMap[accent];
                 const labelTop = title.replace("\n", " ").toUpperCase();
                 return (
-                  <div key={title} className="h-full shrink-0 px-1" style={{ width: `${100 / solutions.length}%` }}>
+                  <div key={title} className="h-full w-full shrink-0 basis-full">
                     <article className="relative h-full overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur-xl shadow-[0_40px_80px_-30px_hsl(222_90%_3%/0.9)] md:p-12">
                       {/* glow border top */}
                       <div

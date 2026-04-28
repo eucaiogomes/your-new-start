@@ -351,6 +351,9 @@ export const StatsAndPartner = () => (
 
       {/* ===== Formulário CTA (unificado, dark) ===== */}
       <ConsultorCta />
+
+      {/* ===== Blog (unificado, dark) ===== */}
+      <BlogUnified />
     </div>
 
     {/* fade inferior — funde com a próxima seção */}

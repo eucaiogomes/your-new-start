@@ -347,3 +347,206 @@ export const StatsAndPartner = () => (
     />
   </section>
 );
+
+/* ============================================================
+   Soluções — Sticky parallax: cards trocam um a um no scroll
+   ============================================================ */
+const SolutionsParallax = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0); // 0..(solutions.length-1)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // total scrollable distance inside this wrapper
+      const total = el.offsetHeight - vh;
+      // how far we've scrolled into the wrapper
+      const scrolled = Math.min(Math.max(-rect.top, 0), total);
+      const p = total > 0 ? scrolled / total : 0;
+      setProgress(p * (solutions.length - 1));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  const activeIndex = Math.round(progress);
+  const atomRotate = progress * 45; // graus
+  const atomTranslateX = Math.sin(progress * Math.PI) * 60;
+  const atomTranslateY = Math.cos(progress * Math.PI) * 40;
+
+  return (
+    <div
+      id="solucoes"
+      ref={wrapperRef}
+      className="relative mt-28"
+      // 1 viewport por card — define a "pista" do scroll
+      style={{ height: `${solutions.length * 100}vh` }}
+    >
+      {/* divisor sutil */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-14 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      />
+
+      {/* Sticky stage */}
+      <div className="sticky top-0 flex h-screen items-center">
+        {/* Átomo de fundo que se move com o progresso */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-[10%] top-1/2 h-[620px] w-[620px] -translate-y-1/2 opacity-50 transition-transform duration-700 ease-out"
+          style={{
+            transform: `translate(${atomTranslateX}px, calc(-50% + ${atomTranslateY}px)) rotate(${atomRotate}deg)`,
+          }}
+        >
+          <svg viewBox="0 0 600 600" className="h-full w-full">
+            <defs>
+              <linearGradient id="solAtomOrange" x1="0" x2="1">
+                <stop offset="0%" stopColor="hsl(22 95% 55%)" stopOpacity="0" />
+                <stop offset="50%" stopColor="hsl(22 95% 55%)" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="hsl(30 100% 62%)" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="solAtomBlue" x1="0" x2="1">
+                <stop offset="0%" stopColor="hsl(222 90% 55%)" stopOpacity="0" />
+                <stop offset="50%" stopColor="hsl(222 90% 55%)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="hsl(222 90% 38%)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="300" cy="300" rx="260" ry="110" stroke="url(#solAtomOrange)" strokeWidth="2" fill="none" transform="rotate(35 300 300)" />
+            <ellipse cx="300" cy="300" rx="260" ry="110" stroke="url(#solAtomBlue)" strokeWidth="1.6" fill="none" transform="rotate(-35 300 300)" />
+            <ellipse cx="300" cy="300" rx="260" ry="110" stroke="url(#solAtomOrange)" strokeWidth="1" fill="none" transform="rotate(90 300 300)" opacity="0.5" />
+            {/* pequenos núcleos */}
+            <circle cx="80" cy="220" r="6" fill="hsl(22 95% 55%)" />
+            <circle cx="540" cy="380" r="5" fill="hsl(222 90% 55%)" />
+          </svg>
+        </div>
+
+        <div className="container relative z-10">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+            {/* LEFT — fixo */}
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Nossas soluções</span>
+                <span className="h-[2px] w-10 bg-accent" />
+              </div>
+              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl">
+                Soluções que <span className="text-accent">impulsionam</span> resultados reais
+              </h2>
+              <p className="mt-7 text-base font-medium text-white/85">
+                Transforme a forma como sua empresa{" "}
+                <span className="font-semibold text-accent">aprende</span>,{" "}
+                <span className="font-semibold text-accent">se comunica</span> e{" "}
+                <span className="font-semibold text-accent">evolui</span>.
+              </p>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60">
+                Hoje, a informação se move rápido — e empresas precisam acompanhar. Com a Lector, você{" "}
+                <strong className="font-semibold text-white">centraliza</strong> conhecimento,{" "}
+                <strong className="font-semibold text-white">fortalece</strong> a comunicação e{" "}
+                <strong className="font-semibold text-white">desenvolve</strong> sua equipe de forma contínua e estratégica.
+              </p>
+              <Button variant="hero" size="lg" className="mt-8" asChild>
+                <a href="#cta">
+                  Conheça a plataforma <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+
+            {/* RIGHT — palco do card ativo */}
+            <div className="relative">
+              <div className="relative h-[460px] md:h-[520px]">
+                {solutions.map(({ icon: Icon, title, desc, accent }, i) => {
+                  const a = accentMap[accent];
+                  const distance = i - progress; // -.. 0 .. +
+                  const abs = Math.abs(distance);
+                  const opacity = Math.max(0, 1 - abs * 1.2);
+                  const translateY = distance * 60; // parallax vertical
+                  const scale = 1 - Math.min(abs * 0.08, 0.16);
+                  const isActive = i === activeIndex;
+                  const cleanTitle = title.replace("\n", " ");
+                  // primeira palavra do título da label superior
+                  const labelTop = cleanTitle.toUpperCase();
+
+                  return (
+                    <article
+                      key={title}
+                      aria-hidden={!isActive}
+                      className="absolute inset-0 rounded-[32px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur-xl shadow-[0_40px_80px_-30px_hsl(222_90%_3%/0.9)] transition-all duration-500 ease-out md:p-12"
+                      style={{
+                        opacity,
+                        transform: `translateY(${translateY}px) scale(${scale})`,
+                        pointerEvents: isActive ? "auto" : "none",
+                        zIndex: 10 - Math.round(abs * 10),
+                      }}
+                    >
+                      {/* glow border */}
+                      <div
+                        aria-hidden
+                        className={`pointer-events-none absolute inset-x-16 top-0 h-px bg-gradient-to-r ${a.cardBorder}`}
+                      />
+                      <div
+                        aria-hidden
+                        className={`pointer-events-none absolute -inset-px rounded-[32px] bg-gradient-to-br ${a.cardBorder} opacity-30`}
+                        style={{ mask: "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)", WebkitMask: "linear-gradient(#000,#000) content-box, linear-gradient(#000,#000)" }}
+                      />
+
+                      <div className="relative grid h-full grid-cols-[auto_1fr] items-center gap-8 md:gap-12">
+                        {/* ícone com halo */}
+                        <div className="relative">
+                          <div
+                            aria-hidden
+                            className={`pointer-events-none absolute inset-0 -m-6 rounded-full ${a.halo} blur-3xl`}
+                          />
+                          <div
+                            className={`relative grid h-28 w-28 place-items-center rounded-full ring-[10px] ring-[hsl(222_90%_6%)] ${a.iconWrap}`}
+                          >
+                            <Icon className="h-12 w-12 text-white" />
+                          </div>
+                        </div>
+
+                        {/* texto */}
+                        <div className="border-l border-white/10 pl-8 md:pl-12">
+                          <span className={`block text-[11px] font-bold uppercase tracking-[0.22em] ${accent === "orange" ? "text-accent" : "text-primary-glow"}`}>
+                            {labelTop}
+                          </span>
+                          <h3 className="mt-4 font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+                            {desc.split(".")[0]}
+                          </h3>
+                          <span className={`mt-5 block h-[3px] w-12 rounded-full ${a.rule}`} />
+                          <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/70 md:text-base">
+                            {desc}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              {/* dots */}
+              <div className="mt-8 flex items-center justify-center gap-3">
+                {solutions.map((s, i) => {
+                  const active = i === activeIndex;
+                  return (
+                    <span
+                      key={s.title}
+                      className={`h-2 rounded-full transition-all duration-500 ${
+                        active ? "w-8 bg-accent" : "w-2 bg-white/25"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

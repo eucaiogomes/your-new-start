@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight, Mail } from "lucide-react";
+import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight, Mail, MapPin, Phone, Linkedin, Youtube, Facebook, Instagram, MessageCircleMore } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import blog1 from "@/assets/blog-1.jpg";
@@ -357,6 +357,9 @@ export const StatsAndPartner = () => (
 
       {/* ===== Newsletter (unificado, dark) ===== */}
       <NewsletterUnified />
+
+      {/* ===== Footer (unificado, dark) ===== */}
+      <FooterUnified />
     </div>
 
     {/* fade inferior — funde com a próxima seção */}
@@ -823,6 +826,127 @@ const NewsletterUnified = () => {
               .
             </p>
           </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ============================================================
+   Footer — Rodapé unificado (dark)
+   ============================================================ */
+const footerCols = [
+  {
+    title: "A Lector",
+    links: ["Sobre a Lector", "Nossa Metodologia", "Nossos Diferenciais", "Cases de Sucesso", "Trabalhe Conosco"],
+  },
+  {
+    title: "Nossas Soluções",
+    links: ["Plataforma Lector Live", "Universidade Corporativa", "Conteúdos Personalizados", "Consultoria Educacional", "Serviços Especializados"],
+  },
+  {
+    title: "Clientes",
+    links: ["Clientes", "Depoimentos", "Resultados", "Blog", "Materiais Ricos"],
+  },
+  {
+    title: "Contato",
+    links: ["Fale com um Especialista", "Solicite uma Demonstração", "Suporte", "LGPD e Privacidade"],
+  },
+];
+
+const FooterUnified = () => {
+  return (
+    <div className="relative mt-20 reveal">
+      {/* divisor sutil */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-10 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      />
+
+      <div className="grid gap-12 pt-4 md:grid-cols-[1.3fr_repeat(4,_1fr)] md:gap-8 lg:gap-10">
+        {/* Brand */}
+        <div>
+          <a href="#" className="flex items-center gap-2.5">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent-gradient shadow-glow-accent">
+              <span className="font-display text-lg font-extrabold text-white">L</span>
+            </div>
+            <div className="leading-none">
+              <div className="font-display text-xl font-extrabold tracking-tight text-white">Lector</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-accent">Tecnologia</div>
+            </div>
+          </a>
+
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">
+            Transformamos a educação corporativa com tecnologia, metodologia e inovação para impulsionar pessoas e resultados.
+          </p>
+
+          <ul className="mt-6 space-y-3 text-sm text-white/65">
+            <li className="flex items-start gap-3">
+              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.04]">
+                <MapPin className="h-3.5 w-3.5 text-accent" />
+              </span>
+              <span className="leading-snug">São Paulo - SP<br />Brasil</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.04]">
+                <Phone className="h-3.5 w-3.5 text-accent" />
+              </span>
+              +55 (11) 2503-0083
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.04]">
+                <Mail className="h-3.5 w-3.5 text-accent" />
+              </span>
+              comercial@lector.com.br
+            </li>
+          </ul>
+        </div>
+
+        {/* Colunas */}
+        {footerCols.map((c) => (
+          <div key={c.title}>
+            <h4 className="font-display text-sm font-bold text-white">{c.title}</h4>
+            <span className="mt-3 block h-[2px] w-8 rounded-full bg-accent" />
+            <ul className="mt-5 space-y-3">
+              {c.links.map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="text-sm text-white/55 transition-colors hover:text-accent"
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Barra inferior */}
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-white/10 pt-6 text-xs text-white/45">
+        <div>
+          © 2026 <span className="font-semibold text-accent">Lector Tecnologia</span>. Todos os direitos reservados.
+        </div>
+
+        <div className="flex flex-wrap items-center gap-5">
+          <a href="#" className="hover:text-white">Política de Privacidade</a>
+          <span className="text-white/20">|</span>
+          <a href="#" className="hover:text-white">Termos de Uso</a>
+          <span className="text-white/20">|</span>
+          <a href="#" className="hover:text-white">LGPD</a>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {[Youtube, Linkedin, Facebook, Instagram, MessageCircleMore].map((Icon, i) => (
+            <a
+              key={i}
+              href="#"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-white/70 transition-all hover:border-accent/40 hover:bg-accent/15 hover:text-accent"
+            >
+              <Icon className="h-3.5 w-3.5" />
+            </a>
+          ))}
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { BarChart3, UserPlus, Clock, ThumbsUp } from "lucide-react";
 const stats = [
   { value: 500, prefix: "+", suffix: "", label: "empresas atendidas", icon: BarChart3 },
   { value: 1, prefix: "+", suffix: " milhão", label: "de usuários ativos", icon: UserPlus },
-  { value: 10, prefix: "+", suffix: " anos", label: "de experiência", icon: Clock },
+  { value: 20, prefix: "+", suffix: " anos", label: "de experiência", icon: Clock },
   { value: 98, prefix: "", suffix: "%", label: "de satisfação", icon: ThumbsUp },
 ];
 

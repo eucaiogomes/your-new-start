@@ -2,8 +2,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { Logos } from "@/components/site/Logos";
 import { ToolsScroll } from "@/components/site/ToolsScroll";
-import { Stats } from "@/components/site/Stats";
-import { MicrosoftBlock } from "@/components/site/MicrosoftBlock";
+import { StatsAndPartner } from "@/components/site/StatsAndPartner";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Solutions } from "@/components/site/Solutions";
 import { CtaForm } from "@/components/site/CtaForm";
@@ -38,8 +37,7 @@ const Index = () => {
       <main>
         <Hero />
         <ToolsScroll />
-        <Stats />
-        <MicrosoftBlock />
+        <StatsAndPartner />
         <Testimonials />
         <Solutions />
         <CtaForm />

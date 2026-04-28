@@ -445,7 +445,8 @@ const LectorAtom = React.forwardRef<HTMLDivElement>((_, ref) => {
       </svg>
     </div>
   );
-};
+});
+LectorAtom.displayName = "LectorAtom";
 
 /* ---------- Section ---------- */
 

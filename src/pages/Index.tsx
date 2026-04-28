@@ -2,6 +2,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { ToolsScroll } from "@/components/site/ToolsScroll";
 import { StatsAndPartner } from "@/components/site/StatsAndPartner";
+import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { useReveal } from "@/hooks/use-reveal";
 import { useEffect } from "react";
 
@@ -33,6 +34,7 @@ const Index = () => {
         <ToolsScroll />
         <StatsAndPartner />
       </main>
+      <WhatsAppFloat />
     </div>
   );
 };

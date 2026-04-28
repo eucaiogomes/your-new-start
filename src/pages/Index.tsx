@@ -1,11 +1,7 @@
 import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
-import { Logos } from "@/components/site/Logos";
 import { ToolsScroll } from "@/components/site/ToolsScroll";
 import { StatsAndPartner } from "@/components/site/StatsAndPartner";
-import { Testimonials } from "@/components/site/Testimonials";
-
-import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
 import { useEffect } from "react";
 
@@ -36,10 +32,7 @@ const Index = () => {
         <Hero />
         <ToolsScroll />
         <StatsAndPartner />
-        <Testimonials />
-        
       </main>
-      <Footer />
     </div>
   );
 };

@@ -339,7 +339,6 @@ export const StatsAndPartner = () => (
       {/* ===== Soluções (dark, integrado) ===== */}
       <SolutionsParallax />
     </div>
-    </div>
 
     {/* fade inferior — funde com a próxima seção (background claro) */}
     <div

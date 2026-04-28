@@ -494,3 +494,137 @@ const SolutionsParallax = () => {
     </div>
   );
 };
+
+/* ============================================================
+   Formulário "Fale com um consultor" — unificado, dark
+   ============================================================ */
+const ConsultorCta = () => {
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success("Mensagem enviada!", { description: "Nosso time entra em contato em breve." });
+    (e.target as HTMLFormElement).reset();
+  };
+
+  const bullets = [
+    "Solução personalizada para o seu negócio",
+    "Mais eficiência na gestão da informação",
+    "Apoio de especialistas em transformação digital",
+  ];
+
+  return (
+    <div id="cta" className="relative mt-28 reveal">
+      {/* divisor sutil */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-14 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      />
+
+      {/* Header centralizado */}
+      <div className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70 ring-1 ring-white/10 backdrop-blur">
+          Fale com um consultor
+        </span>
+        <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-white md:text-5xl text-balance">
+          Garanta o fluxo de{" "}
+          <span className="bg-gradient-to-r from-accent to-accent-glow bg-clip-text text-transparent">
+            informações
+          </span>{" "}
+          na sua empresa!
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-white/65 md:text-base">
+          As ferramentas Lector são a solução ideal para você revolucionar a comunicação e a gestão do conhecimento dentro da organização.
+        </p>
+      </div>
+
+      {/* Card laranja com gradiente */}
+      <div
+        className="relative mt-12 overflow-hidden rounded-[2rem] p-8 shadow-[0_40px_80px_-20px_hsl(22_95%_25%/0.6)] md:p-12"
+        style={{
+          backgroundImage:
+            "linear-gradient(135deg, hsl(22 95% 55%) 0%, hsl(30 100% 62%) 55%, hsl(22 95% 48%) 100%)",
+        }}
+      >
+        {/* textura pontilhada */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.10]" aria-hidden>
+          <svg width="100%" height="100%">
+            <defs>
+              <pattern id="dots-cta-unified" width="22" height="22" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.2" fill="white" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-cta-unified)" />
+          </svg>
+        </div>
+
+        {/* halos */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[hsl(222_80%_22%)]/30 blur-3xl"
+        />
+
+        <div className="relative grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-14">
+          {/* ESQUERDA */}
+          <div>
+            <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/95 text-accent shadow-[0_10px_30px_-8px_hsl(22_95%_25%/0.6)]">
+              <MessageSquareText className="h-7 w-7" strokeWidth={2.4} />
+            </div>
+
+            <h3 className="mt-7 font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+              Converse agora com um{" "}
+              <span className="text-primary">consultor</span> e saiba mais!
+            </h3>
+            <span className="mt-4 block h-[3px] w-16 rounded-full bg-primary" />
+
+            <ul className="mt-8 space-y-3">
+              {bullets.map((b) => (
+                <li key={b} className="flex items-start gap-3 text-sm font-medium text-white/95">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-white" strokeWidth={2.4} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* DIREITA — formulário */}
+          <form onSubmit={onSubmit} className="grid gap-3 self-center">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <input
+                required
+                placeholder="Nome"
+                className="h-12 rounded-xl border border-white/40 bg-white/10 px-4 text-sm text-white placeholder:text-white/70 outline-none backdrop-blur transition focus:border-white focus:bg-white/15 focus:ring-2 focus:ring-white/40"
+              />
+              <input
+                required
+                type="email"
+                placeholder="E-mail"
+                className="h-12 rounded-xl border border-white/40 bg-white/10 px-4 text-sm text-white placeholder:text-white/70 outline-none backdrop-blur transition focus:border-white focus:bg-white/15 focus:ring-2 focus:ring-white/40"
+              />
+              <input
+                placeholder="Telefone"
+                className="h-12 rounded-xl border border-white/40 bg-white/10 px-4 text-sm text-white placeholder:text-white/70 outline-none backdrop-blur transition focus:border-white focus:bg-white/15 focus:ring-2 focus:ring-white/40"
+              />
+              <input
+                placeholder="Empresa"
+                className="h-12 rounded-xl border border-white/40 bg-white/10 px-4 text-sm text-white placeholder:text-white/70 outline-none backdrop-blur transition focus:border-white focus:bg-white/15 focus:ring-2 focus:ring-white/40"
+              />
+            </div>
+            <textarea
+              placeholder="Mensagem"
+              rows={4}
+              className="resize-none rounded-xl border border-white/40 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/70 outline-none backdrop-blur transition focus:border-white focus:bg-white/15 focus:ring-2 focus:ring-white/40"
+            />
+            <div className="mt-2 flex justify-end">
+              <Button type="submit" variant="brand" size="lg">
+                Falar com Consultor <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};

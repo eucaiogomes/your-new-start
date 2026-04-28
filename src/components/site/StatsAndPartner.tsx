@@ -1,5 +1,55 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck } from "lucide-react";
+import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+type Accent = "orange" | "blue";
+
+const solutions: {
+  title: string;
+  desc: string;
+  icon: React.ComponentType<{ className?: string }>;
+  accent: Accent;
+}[] = [
+  {
+    title: "Educação\nCorporativa",
+    desc: "Desenvolva pessoas e equipes com conteúdos, trilhas e experiências de aprendizagem.",
+    icon: GraduationCap,
+    accent: "orange",
+  },
+  {
+    title: "Comunicação\nInterna",
+    desc: "Engaje colaboradores com uma comunicação clara, ágil e conectada em todos os níveis.",
+    icon: MessageCircle,
+    accent: "orange",
+  },
+  {
+    title: "Gestão de\nTalentos",
+    desc: "Identifique potenciais, acompanhe competências e impulsione o crescimento de talentos.",
+    icon: Users,
+    accent: "blue",
+  },
+  {
+    title: "Gestão do\nConhecimento",
+    desc: "Centralize, organize e compartilhe o conhecimento de forma segura e inteligente.",
+    icon: BookOpen,
+    accent: "blue",
+  },
+];
+
+const accentMap: Record<Accent, { iconWrap: string; halo: string; rule: string; cardBorder: string }> = {
+  orange: {
+    iconWrap: "bg-gradient-to-br from-accent to-[hsl(30_100%_62%)] shadow-[0_0_40px_-5px_hsl(22_95%_55%/0.8)]",
+    halo: "bg-accent/30",
+    rule: "bg-accent",
+    cardBorder: "from-accent/40 via-accent/10 to-transparent",
+  },
+  blue: {
+    iconWrap: "bg-gradient-to-br from-primary to-primary-glow shadow-[0_0_40px_-5px_hsl(222_90%_55%/0.8)]",
+    halo: "bg-primary/30",
+    rule: "bg-primary",
+    cardBorder: "from-primary/40 via-primary/10 to-transparent",
+  },
+};
 
 const stats = [
   { value: 500, prefix: "+", suffix: "", label: "empresas atendidas", icon: BarChart3 },
@@ -282,6 +332,84 @@ export const StatsAndPartner = () => (
                 {name}
               </span>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ===== Soluções (dark, integrado) ===== */}
+      <div id="solucoes" className="relative mt-28 reveal">
+        {/* divisor sutil */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -top-14 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+        />
+
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+          {/* LEFT */}
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">Nossas soluções</span>
+              <span className="h-[2px] w-10 bg-accent" />
+            </div>
+            <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl">
+              Soluções que <span className="text-accent">impulsionam</span> resultados reais
+            </h2>
+            <p className="mt-7 text-base font-medium text-white/85">
+              Transforme a forma como sua empresa{" "}
+              <span className="font-semibold text-accent">aprende</span>,{" "}
+              <span className="font-semibold text-accent">se comunica</span> e{" "}
+              <span className="font-semibold text-accent">evolui</span>.
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60">
+              Hoje, a informação se move rápido — e empresas precisam acompanhar. Com a Lector, você{" "}
+              <strong className="font-semibold text-white">centraliza</strong> conhecimento,{" "}
+              <strong className="font-semibold text-white">fortalece</strong> a comunicação e{" "}
+              <strong className="font-semibold text-white">desenvolve</strong> sua equipe de forma contínua e estratégica.
+            </p>
+            <Button variant="hero" size="lg" className="mt-8" asChild>
+              <a href="#cta">
+                Conheça a plataforma <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+
+          {/* RIGHT — cards dark */}
+          <div className="grid grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-4">
+            {solutions.map(({ icon: Icon, title, desc, accent }, i) => {
+              const a = accentMap[accent];
+              return (
+                <article
+                  key={title}
+                  className="group relative flex flex-col rounded-[28px] border border-white/10 bg-white/[0.04] px-5 pb-7 pt-14 text-center backdrop-blur-xl shadow-[0_20px_50px_-25px_hsl(222_90%_3%/0.8)] transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/[0.06]"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  {/* glow border top */}
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r ${a.cardBorder}`}
+                  />
+
+                  {/* halo do ícone */}
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute left-1/2 top-0 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full ${a.halo} blur-2xl`}
+                  />
+
+                  <div
+                    className={`absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 grid h-16 w-16 place-items-center rounded-full ring-[6px] ring-[hsl(222_90%_6%)] ${a.iconWrap} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[8deg]`}
+                  >
+                    <Icon className="h-7 w-7 text-white" />
+                  </div>
+
+                  <h3 className="whitespace-pre-line font-display text-[15px] font-extrabold leading-snug text-white">
+                    {title}
+                  </h3>
+                  <span className={`mx-auto mt-3 block h-[3px] w-10 rounded-full ${a.rule}`} />
+
+                  <p className="mt-5 text-[13px] leading-relaxed text-white/65">{desc}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>

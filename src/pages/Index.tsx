@@ -4,7 +4,7 @@ import { Logos } from "@/components/site/Logos";
 import { ToolsScroll } from "@/components/site/ToolsScroll";
 import { StatsAndPartner } from "@/components/site/StatsAndPartner";
 import { Testimonials } from "@/components/site/Testimonials";
-import { Solutions } from "@/components/site/Solutions";
+
 import { CtaForm } from "@/components/site/CtaForm";
 import { Blog } from "@/components/site/Blog";
 import { Footer } from "@/components/site/Footer";
@@ -39,7 +39,6 @@ const Index = () => {
         <ToolsScroll />
         <StatsAndPartner />
         <Testimonials />
-        <Solutions />
         <CtaForm />
         <Blog />
       </main>

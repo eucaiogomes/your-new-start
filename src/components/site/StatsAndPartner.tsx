@@ -769,70 +769,55 @@ const NewsletterUnified = () => {
         className="pointer-events-none absolute inset-x-0 -top-14 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
       />
 
-      <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-white/[0.02] p-8 backdrop-blur-xl shadow-[0_40px_80px_-20px_hsl(222_90%_3%/0.7)] md:p-12">
-        {/* glows decorativos */}
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl shadow-[0_30px_60px_-20px_hsl(222_90%_3%/0.6)] md:p-8">
+        {/* glow sutil */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
+          className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-primary-glow/25 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
         />
 
-        <div className="relative grid items-center gap-8 lg:grid-cols-[auto_1fr_auto] lg:gap-10">
+        <div className="relative grid items-center gap-6 lg:grid-cols-[auto_1fr] lg:gap-8">
           {/* Ícone + título */}
-          <div className="flex items-start gap-5">
-            <div className="relative shrink-0">
-              <div
-                aria-hidden
-                className="absolute inset-0 rounded-2xl bg-accent/30 blur-xl"
-              />
-              <div className="relative grid h-16 w-16 place-items-center rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/15 to-accent/5 shadow-[0_10px_30px_-8px_hsl(22_95%_55%/0.5)]">
-                <Mail className="h-7 w-7 text-accent" strokeWidth={2} />
-              </div>
+          <div className="flex items-center gap-4">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-accent/30 bg-accent/10">
+              <Mail className="h-5 w-5 text-accent" strokeWidth={2} />
             </div>
-
-            <div className="max-w-md">
-              <h3 className="font-display text-2xl font-extrabold leading-tight text-white md:text-3xl">
+            <div>
+              <h3 className="font-display text-xl font-bold leading-tight text-white md:text-2xl">
                 Fique por dentro das{" "}
-                <span className="bg-gradient-to-r from-accent to-accent-glow bg-clip-text text-transparent">
-                  novidades
-                </span>
+                <span className="text-accent">novidades</span>
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/65">
-                Conteúdos, insights e tendências sobre educação corporativa, tecnologia e performance.
+              <p className="mt-1 text-xs text-white/55 md:text-sm">
+                Insights sobre educação corporativa, tecnologia e performance.
               </p>
             </div>
           </div>
 
           {/* Formulário */}
           <form onSubmit={onSubmit} className="w-full">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="relative flex-1">
-                <input
-                  required
-                  type="email"
-                  name="nl-email"
-                  placeholder="Digite seu e-mail"
-                  className="h-14 w-full rounded-2xl border border-white/15 bg-white/[0.05] px-5 text-sm text-white placeholder:text-white/50 outline-none backdrop-blur transition focus:border-accent/60 focus:bg-white/[0.08] focus:ring-2 focus:ring-accent/30"
-                />
-              </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <input
+                required
+                type="email"
+                name="nl-email"
+                placeholder="Digite seu e-mail"
+                className="h-12 w-full flex-1 rounded-xl border border-white/15 bg-white/[0.04] px-4 text-sm text-white placeholder:text-white/45 outline-none backdrop-blur transition focus:border-accent/60 focus:bg-white/[0.07] focus:ring-2 focus:ring-accent/25"
+              />
               <button
                 type="submit"
-                className="group inline-flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl bg-accent-gradient px-7 text-sm font-semibold text-white shadow-glow-accent transition-transform hover:scale-[1.02]"
+                className="group inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-accent-gradient px-5 text-sm font-semibold text-white shadow-glow-accent transition-transform hover:scale-[1.02]"
               >
                 Inscrever-se
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
             </div>
-            <p className="mt-3 text-xs text-white/45">
+            <p className="mt-2 text-[11px] text-white/40">
               Ao se inscrever, você concorda com nossa{" "}
-              <a href="#" className="text-accent hover:text-accent-glow underline-offset-2 hover:underline">
+              <a href="#" className="text-accent/80 hover:text-accent-glow underline-offset-2 hover:underline">
                 Política de Privacidade
               </a>
               .

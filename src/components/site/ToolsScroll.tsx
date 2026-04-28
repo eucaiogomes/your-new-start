@@ -416,7 +416,7 @@ const tools: Tool[] = [
 
 /* ---------- Lector Atom (átomo orbital de fundo) ---------- */
 
-const LectorAtom = React.forwardRef<HTMLDivElement>((_, ref) => {
+const LectorAtom = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
       ref={ref}

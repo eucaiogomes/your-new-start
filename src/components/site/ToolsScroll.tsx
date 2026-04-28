@@ -533,7 +533,7 @@ export const ToolsScroll = () => {
           <div className="relative mx-auto min-h-[640px] max-w-6xl lg:min-h-[560px]">
             {/* Intro slide */}
             <div
-              className="absolute inset-0 transition-all duration-700"
+              className="absolute inset-0 transition-all duration-500 ease-out"
               style={{
                 opacity: activeIdx === 0 ? 1 : 0,
                 transform: `translateY(${activeIdx === 0 ? 0 : -40}px)`,
@@ -563,7 +563,7 @@ export const ToolsScroll = () => {
               return (
                 <div
                   key={tool.id}
-                  className="absolute inset-0 transition-all duration-700"
+                  className="absolute inset-0 transition-all duration-500 ease-out"
                   style={{
                     opacity: active ? 1 : 0,
                     transform: `translateY(${active ? 0 : offset}px)`,

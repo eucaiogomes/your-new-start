@@ -357,6 +357,9 @@ export const StatsAndPartner = () => (
 
       {/* ===== Newsletter (unificado, dark) ===== */}
       <NewsletterUnified />
+
+      {/* ===== Footer (unificado, dark) ===== */}
+      <FooterUnified />
     </div>
 
     {/* fade inferior — funde com a próxima seção */}

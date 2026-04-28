@@ -440,7 +440,7 @@ const SolutionsParallax = () => {
                           <div className="relative grid h-32 w-32 place-items-center rounded-full bg-[hsl(222_60%_10%)] ring-1 ring-white/10">
                             {/* círculo laranja sólido */}
                             <div className={`grid h-24 w-24 place-items-center rounded-full ${a.iconWrap}`}>
-                              <Icon className="h-11 w-11 text-white" strokeWidth={2.2} />
+                              <Icon className="h-11 w-11 text-white" />
                             </div>
                           </div>
                         </div>

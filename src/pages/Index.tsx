@@ -38,7 +38,6 @@ const Index = () => {
         <ToolsScroll />
         <StatsAndPartner />
         <Testimonials />
-        <CtaForm />
         <Blog />
       </main>
       <Footer />

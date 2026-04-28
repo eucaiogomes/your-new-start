@@ -452,23 +452,50 @@ LectorAtom.displayName = "LectorAtom";
 
 export const ToolsScroll = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
+  const atomRef = useRef<HTMLDivElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
   const totalSlides = tools.length + 1; // intro + tools
+  // Reduced per-slide scroll length for a faster, more fluid feel
+  const slideHeightVh = 65;
 
   useEffect(() => {
-    const onScroll = () => {
+    let ticking = false;
+    let lastIdx = -1;
+
+    const update = () => {
+      ticking = false;
       const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const total = rect.height - window.innerHeight;
       const scrolled = Math.min(Math.max(-rect.top, 0), total);
       const p = total > 0 ? scrolled / total : 0;
-      setProgress(p);
-      setActiveIdx(Math.min(totalSlides - 1, Math.floor(p * totalSlides + 0.0001)));
+
+      // Update atom rotation directly (no React re-render)
+      if (atomRef.current) {
+        atomRef.current.style.transform = `translateY(-50%) rotate(${p * 220}deg)`;
+      }
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${Math.max(4, p * 100)}%`;
+      }
+
+      const idx = Math.min(totalSlides - 1, Math.floor(p * totalSlides + 0.0001));
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        setActiveIdx(idx);
+      }
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -482,12 +509,12 @@ export const ToolsScroll = () => {
       id="ferramentas"
       ref={sectionRef}
       className="relative bg-[radial-gradient(ellipse_at_top,_hsl(222_70%_18%)_0%,_hsl(222_85%_10%)_55%,_hsl(222_90%_7%)_100%)] text-white"
-      style={{ height: `${totalSlides * 100}vh` }}
+      style={{ height: `calc(100vh + ${(totalSlides - 1) * slideHeightVh}vh)` }}
     >
       {/* Sticky stage */}
       <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden">
-        {/* Atom background — rolls with scroll */}
-        <LectorAtom scrollProgress={progress} />
+        {/* Atom background — rolls with scroll (direct DOM updates) */}
+        <LectorAtom ref={atomRef} />
 
         {/* Soft mesh */}
         <div

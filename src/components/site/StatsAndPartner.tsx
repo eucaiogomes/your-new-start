@@ -354,6 +354,9 @@ export const StatsAndPartner = () => (
 
       {/* ===== Blog (unificado, dark) ===== */}
       <BlogUnified />
+
+      {/* ===== Newsletter (unificado, dark) ===== */}
+      <NewsletterUnified />
     </div>
 
     {/* fade inferior — funde com a próxima seção */}

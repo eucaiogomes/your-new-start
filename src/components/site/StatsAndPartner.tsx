@@ -339,12 +339,15 @@ export const StatsAndPartner = () => (
 
       {/* ===== Soluções (dark, integrado) ===== */}
       <SolutionsParallax />
+
+      {/* ===== Formulário CTA (unificado, dark) ===== */}
+      <ConsultorCta />
     </div>
 
-    {/* fade inferior — funde com a próxima seção (background claro) */}
+    {/* fade inferior — funde com a próxima seção */}
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
     />
   </section>
 );

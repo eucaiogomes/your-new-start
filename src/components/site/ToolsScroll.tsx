@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import {
   Video as VideoIcon,
   Users2,
@@ -416,12 +416,12 @@ const tools: Tool[] = [
 
 /* ---------- Lector Atom (átomo orbital de fundo) ---------- */
 
-const LectorAtom = ({ scrollProgress }: { scrollProgress: number }) => {
-  const rot = scrollProgress * 220;
+const LectorAtom = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
-      className="pointer-events-none absolute right-[-180px] top-1/2 h-[680px] w-[680px] -translate-y-1/2 opacity-90"
-      style={{ transform: `translateY(-50%) rotate(${rot}deg)` }}
+      ref={ref}
+      className="pointer-events-none absolute right-[-180px] top-1/2 h-[680px] w-[680px] opacity-90 will-change-transform"
+      style={{ transform: "translateY(-50%) rotate(0deg)" }}
       aria-hidden
     >
       <svg viewBox="0 0 600 600" className="h-full w-full">
@@ -445,29 +445,57 @@ const LectorAtom = ({ scrollProgress }: { scrollProgress: number }) => {
       </svg>
     </div>
   );
-};
+});
+LectorAtom.displayName = "LectorAtom";
 
 /* ---------- Section ---------- */
 
 export const ToolsScroll = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
+  const atomRef = useRef<HTMLDivElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
   const totalSlides = tools.length + 1; // intro + tools
+  // Reduced per-slide scroll length for a faster, more fluid feel
+  const slideHeightVh = 65;
 
   useEffect(() => {
-    const onScroll = () => {
+    let ticking = false;
+    let lastIdx = -1;
+
+    const update = () => {
+      ticking = false;
       const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const total = rect.height - window.innerHeight;
       const scrolled = Math.min(Math.max(-rect.top, 0), total);
       const p = total > 0 ? scrolled / total : 0;
-      setProgress(p);
-      setActiveIdx(Math.min(totalSlides - 1, Math.floor(p * totalSlides + 0.0001)));
+
+      // Update atom rotation directly (no React re-render)
+      if (atomRef.current) {
+        atomRef.current.style.transform = `translateY(-50%) rotate(${p * 220}deg)`;
+      }
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${Math.max(4, p * 100)}%`;
+      }
+
+      const idx = Math.min(totalSlides - 1, Math.floor(p * totalSlides + 0.0001));
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        setActiveIdx(idx);
+      }
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -481,12 +509,12 @@ export const ToolsScroll = () => {
       id="ferramentas"
       ref={sectionRef}
       className="relative bg-[radial-gradient(ellipse_at_top,_hsl(222_70%_18%)_0%,_hsl(222_85%_10%)_55%,_hsl(222_90%_7%)_100%)] text-white"
-      style={{ height: `${totalSlides * 100}vh` }}
+      style={{ height: `calc(100vh + ${(totalSlides - 1) * slideHeightVh}vh)` }}
     >
       {/* Sticky stage */}
       <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden">
-        {/* Atom background — rolls with scroll */}
-        <LectorAtom scrollProgress={progress} />
+        {/* Atom background — rolls with scroll (direct DOM updates) */}
+        <LectorAtom ref={atomRef} />
 
         {/* Soft mesh */}
         <div
@@ -505,7 +533,7 @@ export const ToolsScroll = () => {
           <div className="relative mx-auto min-h-[640px] max-w-6xl lg:min-h-[560px]">
             {/* Intro slide */}
             <div
-              className="absolute inset-0 transition-all duration-700"
+              className="absolute inset-0 transition-all duration-500 ease-out"
               style={{
                 opacity: activeIdx === 0 ? 1 : 0,
                 transform: `translateY(${activeIdx === 0 ? 0 : -40}px)`,
@@ -535,7 +563,7 @@ export const ToolsScroll = () => {
               return (
                 <div
                   key={tool.id}
-                  className="absolute inset-0 transition-all duration-700"
+                  className="absolute inset-0 transition-all duration-500 ease-out"
                   style={{
                     opacity: active ? 1 : 0,
                     transform: `translateY(${active ? 0 : offset}px)`,
@@ -589,8 +617,9 @@ export const ToolsScroll = () => {
           </div>
           <div className="h-[2px] w-full bg-white/5">
             <div
-              className="h-full bg-gradient-to-r from-accent to-accent-glow transition-[width] duration-200 ease-out"
-              style={{ width: `${Math.max(4, progress * 100)}%` }}
+              ref={progressBarRef}
+              className="h-full bg-gradient-to-r from-accent to-accent-glow"
+              style={{ width: "4%" }}
             />
           </div>
         </div>

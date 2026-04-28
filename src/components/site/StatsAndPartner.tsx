@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2 } from "lucide-react";
+import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import blog1 from "@/assets/blog-1.jpg";
+import blog2 from "@/assets/blog-2.jpg";
+import blog3 from "@/assets/blog-3.jpg";
+
+const blogPosts = [
+  { tag: "Gestão do Conhecimento", title: "Como a educação corporativa pode transformar resultados", img: blog1 },
+  { tag: "Treinamento", title: "Tendências de aprendizagem para os próximos anos", img: blog2, highlight: true },
+  { tag: "Comunicação", title: "Estratégias para comunicar com impacto na empresa", img: blog3 },
+];
 
 type Accent = "orange" | "blue";
 

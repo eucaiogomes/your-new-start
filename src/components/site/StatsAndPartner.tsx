@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight, Mail } from "lucide-react";
+import { BarChart3, UserPlus, Clock, ThumbsUp, Play, ArrowRight, ShieldCheck, GraduationCap, MessageCircle, Users, BookOpen, MessageSquareText, CheckCircle2, ChevronRight, Mail, MapPin, Phone, Linkedin, Youtube, Facebook, Instagram, MessageCircleMore } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import blog1 from "@/assets/blog-1.jpg";

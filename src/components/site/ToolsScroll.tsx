@@ -416,12 +416,12 @@ const tools: Tool[] = [
 
 /* ---------- Lector Atom (átomo orbital de fundo) ---------- */
 
-const LectorAtom = ({ scrollProgress }: { scrollProgress: number }) => {
-  const rot = scrollProgress * 220;
+const LectorAtom = React.forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <div
-      className="pointer-events-none absolute right-[-180px] top-1/2 h-[680px] w-[680px] -translate-y-1/2 opacity-90"
-      style={{ transform: `translateY(-50%) rotate(${rot}deg)` }}
+      ref={ref}
+      className="pointer-events-none absolute right-[-180px] top-1/2 h-[680px] w-[680px] opacity-90 will-change-transform"
+      style={{ transform: "translateY(-50%) rotate(0deg)" }}
       aria-hidden
     >
       <svg viewBox="0 0 600 600" className="h-full w-full">

@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lector Live — Premium SaaS Design System
+   All colors HSL. Tokens drive the entire visual language.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 8%;
+
+    /* Brand: deep institutional blue */
+    --primary: 222 80% 22%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 222 90% 38%;
+    --primary-soft: 222 70% 96%;
+
+    /* Brand: vibrant orange */
+    --accent: 22 95% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 30 100% 62%;
+    --accent-soft: 28 100% 96%;
+
+    --secondary: 220 30% 97%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 25% 96%;
+    --muted-foreground: 222 14% 45%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 92%;
+    --input: 220 20% 92%;
+    --ring: 222 80% 22%;
+
+    --radius: 1rem;
+
+    /* Surfaces */
+    --surface: 220 30% 99%;
+    --surface-elevated: 0 0% 100%;
+    --ink: 222 47% 8%;
+    --ink-soft: 222 25% 30%;
+
+    /* Gradients */
+    --gradient-brand: linear-gradient(135deg, hsl(222 80% 22%) 0%, hsl(222 90% 38%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(22 95% 55%) 0%, hsl(30 100% 62%) 100%);
+    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 0%, hsl(222 90% 96%) 0%, hsl(0 0% 100%) 60%);
+    --gradient-mesh: radial-gradient(circle at 20% 20%, hsl(222 90% 95%) 0%, transparent 50%),
+                     radial-gradient(circle at 80% 30%, hsl(28 100% 95%) 0%, transparent 50%),
+                     radial-gradient(circle at 50% 80%, hsl(222 70% 97%) 0%, transparent 50%);
+
+    /* Shadows — soft, premium */
+    --shadow-xs: 0 1px 2px hsl(222 47% 8% / 0.04);
+    --shadow-sm: 0 2px 8px -2px hsl(222 47% 8% / 0.06);
+    --shadow-md: 0 8px 24px -8px hsl(222 47% 8% / 0.10);
+    --shadow-lg: 0 24px 48px -16px hsl(222 47% 8% / 0.14);
+    --shadow-xl: 0 40px 80px -24px hsl(222 80% 22% / 0.22);
+    --shadow-glow: 0 20px 60px -20px hsl(222 90% 38% / 0.45);
+    --shadow-accent: 0 16px 40px -12px hsl(22 95% 55% / 0.40);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Sora', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: 'Sora', 'Inter', sans-serif; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .bg-mesh { background-image: var(--gradient-mesh); }
+  .bg-hero { background-image: var(--gradient-hero); }
+  .bg-brand { background-image: var(--gradient-brand); }
+  .bg-accent-gradient { background-image: var(--gradient-accent); }
+
+  .shadow-soft { box-shadow: var(--shadow-sm); }
+  .shadow-card { box-shadow: var(--shadow-md); }
+  .shadow-elevated { box-shadow: var(--shadow-lg); }
+  .shadow-premium { box-shadow: var(--shadow-xl); }
+  .shadow-glow-brand { box-shadow: var(--shadow-glow); }
+  .shadow-glow-accent { box-shadow: var(--shadow-accent); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Floating label */
+  .floating-input { @apply w-full bg-transparent px-4 pt-6 pb-2 text-base text-foreground outline-none border border-border rounded-xl transition-all; }
+  .floating-input:focus { @apply border-primary ring-4 ring-primary/10; }
+  .floating-label { @apply pointer-events-none absolute left-4 top-4 text-muted-foreground transition-all duration-200; }
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label { @apply top-1.5 text-xs text-primary font-medium; }
+
+  .card-hover { transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out); }
+  .card-hover:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+  /* Orbital animation */
+  @keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes orbit-counter { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes pulse-soft { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+  .animate-orbit { animation: orbit-spin 40s linear infinite; }
+  .animate-orbit-counter { animation: orbit-counter 40s linear infinite; }
+  .animate-float { animation: float-y 6s ease-in-out infinite; }
+
+  @keyframes card-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .solution-card { animation: card-float 5.5s ease-in-out infinite; }
+  .solution-card:hover { animation-play-state: paused; }
+  .animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+
+  .marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .marquee-track { display: flex; gap: 4rem; animation: marquee 40s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @keyframes cascade-in {
+    0% { opacity: 0; transform: translateX(-40px) scale(0.92); filter: blur(4px); }
+    60% { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+  }
+}

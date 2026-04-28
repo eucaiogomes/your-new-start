@@ -2,6 +2,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { Logos } from "@/components/site/Logos";
 import { ToolsScroll } from "@/components/site/ToolsScroll";
+import { StatsAndPartner } from "@/components/site/StatsAndPartner";
 import { Testimonials } from "@/components/site/Testimonials";
 
 import { CtaForm } from "@/components/site/CtaForm";
@@ -36,6 +37,7 @@ const Index = () => {
       <main>
         <Hero />
         <ToolsScroll />
+        <StatsAndPartner />
         <Testimonials />
         <CtaForm />
         <Blog />

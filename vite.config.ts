@@ -1,18 +1,14 @@
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   server: {
     host: "::",
     port: 8080,
     hmr: { overlay: false },
   },
-  plugins: [
-    tanstackStart(),
-    mode === "development" && componentTagger(),
-  ].filter(Boolean),
+  plugins: [tanstackStart()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -27,4 +23,4 @@ export default defineConfig(({ mode }) => ({
       "@tanstack/react-router",
     ],
   },
-}));
+});

@@ -361,12 +361,7 @@ export const StatsAndPartner = () => (
       {/* ===== Footer (unificado, dark) ===== */}
       <FooterUnified />
     </div>
-
-    {/* fade inferior — funde com a próxima seção */}
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
-    />
+  
   </section>
 );
 

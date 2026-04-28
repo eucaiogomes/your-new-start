@@ -37,7 +37,7 @@ const Index = () => {
         <ToolsScroll />
         <StatsAndPartner />
         <Testimonials />
-        <Blog />
+        
       </main>
       <Footer />
     </div>

@@ -5,7 +5,6 @@ import { ToolsScroll } from "@/components/site/ToolsScroll";
 import { StatsAndPartner } from "@/components/site/StatsAndPartner";
 import { Testimonials } from "@/components/site/Testimonials";
 
-import { CtaForm } from "@/components/site/CtaForm";
 import { Blog } from "@/components/site/Blog";
 import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
